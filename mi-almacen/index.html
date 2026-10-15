@@ -1,1 +1,497 @@
-<h1>test</h1>
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<meta name="theme-color" content="#006b2c"/>
+<meta name="description" content="Tablero de administración del almacén: pedidos por WhatsApp, ventas y stock."/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="Mi Almacén"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23006b2c'/%3E%3Ctext x='96' y='130' font-size='110' text-anchor='middle' fill='white' font-family='sans-serif'%3E%F0%9F%8F%AA%3C/text%3E%3C/svg%3E"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23006b2c'/%3E%3Ctext x='96' y='130' font-size='110' text-anchor='middle' fill='white' font-family='sans-serif'%3E%F0%9F%8F%AA%3C/text%3E%3C/svg%3E"/>
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Mi%20Almac%C3%A9n%22%2C%22short_name%22%3A%22Mi%20Almac%C3%A9n%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23faf8ff%22%2C%22theme_color%22%3A%22%23006b2c%22%7D"/>
+
+<title>Mi Almacén - Tablero de Administración</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#131b2e",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#00873b",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#3e4a3d",
+            "primary": "#006b2c",
+            "secondary-fixed-dim": "#ffb95f",
+            "outline": "#6e7b6c",
+            "surface-variant": "#dae2fd",
+            "surface-bright": "#faf8ff",
+            "tertiary": "#006b2d",
+            "on-primary": "#ffffff",
+            "surface": "#faf8ff",
+            "on-secondary-fixed": "#2a1700",
+            "surface-container-high": "#e2e7ff",
+            "tertiary-fixed": "#6bff8f",
+            "inverse-surface": "#283044",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f2f3ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#002109",
+            "primary-container": "#00873a",
+            "on-primary-fixed-variant": "#005320",
+            "inverse-primary": "#62df7d",
+            "on-secondary-fixed-variant": "#653e00",
+            "inverse-on-surface": "#eef0ff",
+            "surface-container-highest": "#dae2fd",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#684000",
+            "secondary-fixed": "#ffddb8",
+            "on-tertiary-container": "#f7fff3",
+            "on-secondary": "#ffffff",
+            "background": "#faf8ff",
+            "primary-fixed": "#7ffc97",
+            "on-primary-container": "#f7fff2",
+            "primary-fixed-dim": "#62df7d",
+            "on-primary-fixed": "#002109",
+            "surface-tint": "#006e2d",
+            "tertiary-fixed-dim": "#4ae176",
+            "on-error": "#ffffff",
+            "secondary": "#855300",
+            "secondary-container": "#fea619",
+            "surface-dim": "#d2d9f4",
+            "on-background": "#131b2e",
+            "surface-container": "#eaedff",
+            "outline-variant": "#bdcaba",
+            "on-tertiary-fixed-variant": "#005321"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-xl": "2rem",
+            "margin": "1.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "display": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-md": ["20px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+            "headline-sm": ["16px", {"lineHeight": "22px", "fontWeight": "600"}],
+            "display-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "800"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      min-height: 100dvh;
+    }
+    /* Mobile polish: respect notch / home-bar safe areas */
+    body { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+    header { padding-top: env(safe-area-inset-top); }
+    nav.md\:hidden { padding-bottom: calc(0.5rem + env(safe-area-inset-bottom)); }
+    @media (min-width: 768px) { body { padding-bottom: 3rem; } }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased pb-24 md:pb-12 min-h-screen flex flex-col">
+<!-- TopAppBar Component (from Shared Components JSON) -->
+<header class="bg-surface dark:bg-surface shadow-sm dark:shadow-none sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center p-2 rounded-lg text-primary dark:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-2xl" data-icon="storefront">storefront</span>
+</button>
+<span class="text-headline-md font-headline-md text-primary dark:text-primary-fixed tracking-tight">Mi Almacén</span>
+</div>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container hover:text-primary dark:hover:text-primary-fixed px-3 py-1.5 rounded-lg font-label-md text-label-md transition-all" href="#">Catálogo</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container hover:text-primary dark:hover:text-primary-fixed px-3 py-1.5 rounded-lg font-label-md text-label-md transition-all" href="#">Pedidos</a>
+<a class="text-primary dark:text-primary-fixed font-bold bg-surface-container-high px-3 py-1.5 rounded-lg font-label-md text-label-md transition-all" href="#">Tablero</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container hover:text-primary dark:hover:text-primary-fixed px-3 py-1.5 rounded-lg font-label-md text-label-md transition-all" href="#">Inventario</a>
+</nav>
+<div class="flex items-center gap-2">
+<button aria-label="Notificaciones" class="relative p-2 rounded-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center justify-center font-bold">
+          M
+        </div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 flex-1">
+<!-- Hero Header / Store Operations Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-4 sm:p-6 shadow-sm border border-outline-variant/40 mb-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<!-- Saludo & Fecha -->
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">
+              Hola, Mario 👋
+            </h1>
+</div>
+<p class="text-body-sm font-body-sm text-outline flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+<span>Jueves, 24 de Octubre • Turno Tarde</span>
+</p>
+</div>
+<!-- Controls: Store Status Toggle & New Product CTA -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Store Toggle Control -->
+<div class="bg-surface-container-low px-3 py-1.5 rounded-full flex items-center gap-3 border border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" id="status-indicator"></span>
+<span class="text-label-md font-label-md text-on-surface" id="status-label">Almacén Abierto</span>
+</div>
+<button aria-checked="true" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-primary transition-colors duration-200 ease-in-out focus:outline-none" id="toggle-store-btn" onclick="toggleStoreStatus()" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface-container-lowest shadow ring-0 transition duration-200 ease-in-out" id="toggle-circle"></span>
+</button>
+</div>
+<!-- Quick Action: Nuevo Producto -->
+<button class="bg-primary text-on-primary hover:bg-primary-container px-4 py-2.5 rounded-xl font-label-lg text-label-lg flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>Nuevo Producto</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Metrics Bento Grid (3 Key Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+<!-- Metric 1: Pedidos WhatsApp -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/40 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="text-label-md font-label-md text-outline">Pedidos por WhatsApp</span>
+<div class="text-display-mobile md:text-display font-display text-on-surface mt-1">28</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="chat">chat</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-label-sm font-label-sm text-primary">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="trending_up">trending_up</span>
+<span class="font-bold">+15%</span>
+<span class="text-outline font-normal">vs ayer a esta hora</span>
+</div>
+</div>
+<!-- Metric 2: Ventas Estimadas -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/40 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<span class="text-label-md font-label-md text-outline">Ventas Estimadas del Día</span>
+<div class="text-display-mobile md:text-display font-display text-primary mt-1">$148.500</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="check_circle">check_circle</span>
+<span>Ticket promedio: <strong>$5.300</strong></span>
+</div>
+</div>
+<!-- Metric 3: Alerta de Stock Crítico -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/40 shadow-sm relative overflow-hidden group hover:border-error/40 transition-all sm:col-span-2 lg:col-span-1">
+<div class="flex items-start justify-between">
+<div>
+<span class="text-label-md font-label-md text-outline">Alerta de Stock Crítico</span>
+<div class="text-display-mobile md:text-display font-display text-error mt-1">4 <span class="text-headline-sm font-headline-sm font-normal text-on-surface">ítems</span></div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="warning">warning</span>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-error-container bg-error-container/60 px-2 py-0.5 rounded-full">
+            Leche Entera, Harina 000, Yerba 1kg...
+          </span>
+<button class="text-primary hover:text-primary-container text-label-sm font-label-sm font-bold flex items-center">
+            Reponer
+            <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Two Columns Layout: Pedidos Recientes & Acciones Rápidas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Pedidos recientes por WhatsApp (8 Cols) -->
+<section class="lg:col-span-8 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Pedidos recientes por WhatsApp</h2>
+<p class="text-body-sm font-body-sm text-outline">Transacciones y envíos directos de los vecinos</p>
+</div>
+<span class="bg-surface-container-high text-primary px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold">
+            4 pendientes
+          </span>
+</div>
+<!-- Orders Cards List -->
+<div class="flex flex-col gap-3">
+<!-- Order Card 1: Nuevo -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-all border-l-4 border-l-primary">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/15 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Doña Clara (Pasaje 3)</span>
+<span class="bg-primary/10 text-primary text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">Nuevo</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">3 productos • Frutas y Verduras</p>
+<div class="flex items-center gap-2 mt-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+<span>Hace 6 min (16:42 hs)</span>
+</div>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/30 gap-2">
+<span class="text-headline-md font-headline-md text-on-surface">$4.850</span>
+<a class="bg-primary hover:bg-primary-container text-on-primary px-3 py-1.5 rounded-lg text-label-md font-label-md flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" href="https://wa.me/?text=Hola%2C%20te%20escribo%20del%20almac%C3%A9n" target="_blank" rel="noopener">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>Reabrir chat de WhatsApp</span>
+</a>
+</div>
+</div>
+<!-- Order Card 2: Preparando -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-all border-l-4 border-l-secondary-container">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Lucas Ramírez</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">Preparando</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">6 productos • Lácteos, Panificados y Fiambres</p>
+<div class="flex items-center gap-2 mt-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+<span>Hace 24 min (16:24 hs)</span>
+</div>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/30 gap-2">
+<span class="text-headline-md font-headline-md text-on-surface">$12.300</span>
+<a class="bg-surface-container-low text-primary border border-outline-variant/60 hover:bg-surface-container-high px-3 py-1.5 rounded-lg text-label-md font-label-md flex items-center gap-1.5 active:scale-95 transition-all" href="https://wa.me/?text=Hola%2C%20te%20escribo%20del%20almac%C3%A9n" target="_blank" rel="noopener">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>Reabrir chat de WhatsApp</span>
+</a>
+</div>
+</div>
+<!-- Order Card 3: Enviado -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-all border-l-4 border-l-outline">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Sra. Beatriz (Av. Belgrano)</span>
+<span class="bg-surface-container text-on-surface-variant text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">Enviado</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">2 productos • Artículos de Limpieza</p>
+<div class="flex items-center gap-2 mt-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+<span>Hace 48 min • Cadete en camino</span>
+</div>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/30 gap-2">
+<span class="text-headline-md font-headline-md text-on-surface">$3.600</span>
+<a class="bg-surface-container-low text-primary border border-outline-variant/60 hover:bg-surface-container-high px-3 py-1.5 rounded-lg text-label-md font-label-md flex items-center gap-1.5 active:scale-95 transition-all" href="https://wa.me/?text=Hola%2C%20te%20escribo%20del%20almac%C3%A9n" target="_blank" rel="noopener">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>Reabrir chat de WhatsApp</span>
+</a>
+</div>
+</div>
+<!-- Order Card 4: Completado -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-all border-l-4 border-l-tertiary-fixed-dim opacity-85">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Martín Albarracín</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">Completado</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">4 productos • Almacén y Bebidas</p>
+<div class="flex items-center gap-2 mt-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+<span>Entregado a las 15:10 hs</span>
+</div>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/30 gap-2">
+<span class="text-headline-md font-headline-md text-on-surface">$8.120</span>
+<a class="text-primary hover:text-primary-container px-3 py-1.5 rounded-lg text-label-md font-label-md flex items-center gap-1.5 active:scale-95 transition-all" href="https://wa.me/?text=Hola%2C%20te%20escribo%20del%20almac%C3%A9n" target="_blank" rel="noopener">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>Reabrir chat de WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Acciones Rápidas de Gestión (4 Cols) -->
+<section class="lg:col-span-4 flex flex-col gap-4">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Acciones rápidas de gestión</h2>
+<p class="text-body-sm font-body-sm text-outline">Herramientas de productividad del comercio</p>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Action 1: Cargar / Editar Datos de Productos -->
+<button class="w-full text-left bg-surface-container-lowest hover:bg-surface-container-low rounded-xl p-4 border border-outline-variant/40 shadow-sm flex items-center justify-between group transition-all">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm text-on-surface block">Cargar / Editar Datos de Productos</span>
+<span class="text-body-sm font-body-sm text-outline">Actualizá precios y stock en lote</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Action 2: Exportar Lista de Precios en PDF/Excel -->
+<button class="w-full text-left bg-surface-container-lowest hover:bg-surface-container-low rounded-xl p-4 border border-outline-variant/40 shadow-sm flex items-center justify-between group transition-all">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm text-on-surface block">Exportar Lista de Precios</span>
+<span class="text-body-sm font-body-sm text-outline">Generar archivo en PDF o Excel para clientes</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Action 3: Configurar Mensaje de WhatsApp -->
+<button class="w-full text-left bg-surface-container-lowest hover:bg-surface-container-low rounded-xl p-4 border border-outline-variant/40 shadow-sm flex items-center justify-between group transition-all">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="quickreply">quickreply</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm text-on-surface block">Configurar Mensaje de WhatsApp</span>
+<span class="text-body-sm font-body-sm text-outline">Plantillas automáticas y bienvenida</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Banner de Consejos para Don Mario -->
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/30 mt-2">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="lightbulb">lightbulb</span>
+<div>
+<span class="text-label-lg font-label-lg text-on-surface block">Consejo del día</span>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">
+                  Los viernes aumenta la demanda de bebidas y carbón un 40%. Revisá el stock preventivo antes de las 19:00 hs.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar Component (Shared Components JSON) -->
+<!-- Contextual Logic: On mobile, visible. Active tab: 'Tablero' -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 bg-surface dark:bg-surface shadow-lg dark:shadow-none">
+<!-- Item 0: Catálogo (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-on-surface active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="storefront">storefront</span>
+<span class="text-label-sm font-label-sm">Catálogo</span>
+</a>
+<!-- Item 1: Pedidos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-on-surface active:scale-95 transition-transform duration-150 relative" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-label-sm font-label-sm">Pedidos</span>
+<span class="absolute top-1 right-2 w-2 h-2 rounded-full bg-primary"></span>
+</a>
+<!-- Item 2: Tablero (ACTIVE - mapped to this page's intent) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-full px-3 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm">Tablero</span>
+</a>
+<!-- Item 3: Inventario (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container dark:hover:bg-surface-container hover:text-on-surface dark:hover:text-on-surface active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="inventory_2">inventory_2</span>
+<span class="text-label-sm font-label-sm">Inventario</span>
+</a>
+</nav>
+<!-- Interactive script for store toggle micro-interaction -->
+<script>
+    let isOpen = true;
+    function toggleStoreStatus() {
+      isOpen = !isOpen;
+      const toggleBtn = document.getElementById('toggle-store-btn');
+      const toggleCircle = document.getElementById('toggle-circle');
+      const statusLabel = document.getElementById('status-label');
+      const statusIndicator = document.getElementById('status-indicator');
+
+      if (isOpen) {
+        toggleBtn.classList.remove('bg-outline');
+        toggleBtn.classList.add('bg-primary');
+        toggleCircle.classList.remove('translate-x-0');
+        toggleCircle.classList.add('translate-x-5');
+        statusLabel.textContent = 'Almacén Abierto';
+        statusIndicator.classList.remove('bg-error');
+        statusIndicator.classList.add('bg-primary');
+        toggleBtn.setAttribute('aria-checked', 'true');
+      } else {
+        toggleBtn.classList.remove('bg-primary');
+        toggleBtn.classList.add('bg-outline');
+        toggleCircle.classList.remove('translate-x-5');
+        toggleCircle.classList.add('translate-x-0');
+        statusLabel.textContent = 'Almacén Cerrado';
+        statusIndicator.classList.remove('bg-primary');
+        statusIndicator.classList.add('bg-error');
+        toggleBtn.setAttribute('aria-checked', 'false');
+      }
+    }
+  </script>
